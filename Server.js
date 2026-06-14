@@ -9,9 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 // MongoDB Connection
-mongoose.connect(
-  "mongodb://barathkumar1321_db_user:Barath123@ac-0adotpy-shard-00-00.nptnhve.mongodb.net:27017,ac-0adotpy-shard-00-01.nptnhve.mongodb.net:27017,ac-0adotpy-shard-00-02.nptnhve.mongodb.net:27017/?ssl=true&replicaSet=atlas-kbkaix-shard-0&authSource=admin&appName=Cluster1"
-)
+mongoose.connect(process.env.MONGODB_URI)
 .then(() => {
   console.log("✅ MongoDB connected");
 })
@@ -34,8 +32,8 @@ app.get("/test", (req, res) => {
 });
 
 // Server
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
